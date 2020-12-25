@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Task from './Task';
 class SpotCheck5 extends Component {
 
   // Each task should be desplayed with a Task component.
@@ -19,13 +19,16 @@ class SpotCheck5 extends Component {
   }
 
   markComplete = text => {
-
+    let currTasks = [...this.state.tasks]
+    currTasks.find(t => t.text === text).complete = true
+    this.setState({
+      tasks: currTasks
+    })
   }
 
-  render() {
-    return (
-      <div></div>
-    )
+  render(){
+
+    return this.state.tasks.filter(t => !t.complete).map(t => <Task task={t} markComplete={this.markComplete} />)
   }
 }
 
